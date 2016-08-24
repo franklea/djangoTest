@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Get Web Pages</title>
+     <link rel="stylesheet" type="text/css" href="{% static 'css/new_blah.css' %}">
+</head>
+<body>
+<div class="main-content">
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<form method="post" action="/result/">
+    {% csrf_token %}
+
+    Device ID:<br>
+    <input name="device_id" type="text" value="device id">
+    <br><br>
+
+    Ip Address:<br>
+    <script type="text/javascript">
+        document.write("<input type=\"text\" name=\"ip\" value=" + returnCitySN["cip"] + ">")
+    </script>
+    <br><br>
+
+    URL:<br>
+    <input name="url" type="url" >
+    <br><br>
+
+    Content:<br>
+    <textarea name = "content" rows = 10 cols = 20 style="overflow-y: scroll"></textarea>
+    <br>
+    <input type="submit" name="提交">
+
+</form>
+</div>
+
+<div>
+
+</div>
+</body>
+</html>

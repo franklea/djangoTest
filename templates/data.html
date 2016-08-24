@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date Received !</title>
+</head>
+<body>
+<p>
+<h3>
+    {{ hint }}
+</h3>
+<form>
+    Name:<br>
+    <input type="text" name = "name"><br>
+    PassWord:<br>
+    <input type="password" name="pwd"><br>
+    <input type="submit" value="提交">
+</form>
+</p>
+
+<p>
+<form action="/data/" method="post">
+    {% csrf_token %}
+    User:<br>
+    <input type="text" name="user"><br>
+    <textarea name="content" rows = '10' cols = '30' style="overflow-y:scroll">Please input your content here</textarea>
+    <input type="submit" value="提交">
+</form>
+</p>
+<p>
+    {{ result }}<br>
+    {{ dbrst }}
+</p>
+</body>
+</html>

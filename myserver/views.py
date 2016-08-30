@@ -1,17 +1,21 @@
 from django.shortcuts import render
 from models import User,Test,WebPage
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 # Create your views here
 
 def index(request):
     return render(request, 'index.html')
 
+@csrf_exempt
 def data(request):
     if request.method == 'GET':
         print "---------- A Get Request --------"
-        if 'name' in request.GET and 'pwd' in request.GET:
+        if 'name' in request.GET and 'age' in request.GET:
             print 'name: ' + request.GET['name'].encode('utf-8')
-            print 'pwd: ' + request.GET['pwd'].encode('utf-8')
+            print 'age: ' + request.GET['age'].encode('utf-8')
+            print 'val:' + request.GET['val'].encode('utf-8')
             context = {}
             test_list = Test.objects.all()
             res = Test.objects.get(user='Tom')
@@ -24,18 +28,21 @@ def data(request):
 
     elif request.method == 'POST':
         print "---------- A POST Request --------"
-        if 'content' in request.POST and 'user' in request.POST:
-            print 'user: ' + request.POST['user']
-            print "content: " + request.POST['content']
+        if 'name' in request.POST and 'age' in request.POST:
+            print 'name : ' + request.POST['name']
+            print 'age : '  + request.POST['age']
+            print 'val : ' + request.POST['val']
 
             # save to db
-            item = Test(user=request.POST['user'],content=request.POST['content'])
-            item.save()
+            #item = Test(user=request.POST['user'],content=request.POST['content'])
+            #item.save()
 
-            context = {}
-            context['result'] = request.POST['user'] + '\n' + request.POST['content']
-            context['dbrst'] = "date save succeed! "
-            return render(request,'data.html',context)
+            #context = {}
+            #context['result'] = request.POST['name'] + '\n' + request.POST['age']
+            #context['dbrst'] = "date save succeed! "
+            #return render(request,'data.html',context)
+            response = JsonResponse({'response': 'Thank you ! Have a good day! '})
+            return response
     return render(request, 'data.html')
 
 def getpages(request):

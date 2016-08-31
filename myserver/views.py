@@ -12,10 +12,10 @@ def index(request):
 def data(request):
     if request.method == 'GET':
         print "---------- A Get Request --------"
-        if 'name' in request.GET and 'age' in request.GET:
-            print 'name: ' + request.GET['name'].encode('utf-8')
-            print 'age: ' + request.GET['age'].encode('utf-8')
-            print 'val:' + request.GET['val'].encode('utf-8')
+        if 'url' in request.GET and 'html' in request.GET:
+            print 'url: ' + request.GET['url'].encode('utf-8')
+            #print 'html: ' + request.GET['html'].encode('utf-8')
+            #print 'val:' + request.GET['val'].encode('utf-8')
             context = {}
             test_list = Test.objects.all()
             res = Test.objects.get(user='Tom')
@@ -28,10 +28,10 @@ def data(request):
 
     elif request.method == 'POST':
         print "---------- A POST Request --------"
-        if 'name' in request.POST and 'age' in request.POST:
-            print 'name : ' + request.POST['name']
-            print 'age : '  + request.POST['age']
-            print 'val : ' + request.POST['val']
+        if 'url' in request.POST and 'html' in request.POST:
+            print 'url : ' + request.POST['url']
+            #print 'html : '  + request.POST['html']
+            #print 'val : ' + request.POST['val']
 
             # save to db
             #item = Test(user=request.POST['user'],content=request.POST['content'])
@@ -41,8 +41,8 @@ def data(request):
             #context['result'] = request.POST['name'] + '\n' + request.POST['age']
             #context['dbrst'] = "date save succeed! "
             #return render(request,'data.html',context)
-            response = JsonResponse({'response': 'Thank you ! Have a good day! '})
-            return response
+        response = JsonResponse({'response': 'Thank you ! Have a good day! '})
+        return response
     return render(request, 'data.html')
 
 def getpages(request):
